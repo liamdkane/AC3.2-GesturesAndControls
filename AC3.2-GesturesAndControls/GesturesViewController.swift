@@ -136,7 +136,8 @@ class GesturesViewController: UIViewController {
         self.currentActionGesture = pickRandomActionGesture()
         
         if correct {
-            self.view.backgroundColor = UIColor.green
+           // self.view.backgroundColor = UIColor(hue: CGFloat(Float(self.correctColorValue)), saturation: 1.0, brightness: 1.0, alpha: 1.0)
+            self.view.backgroundColor = UIColor(red: CGFloat(Float(self.correctColorValue)), green: CGFloat(Float(self.correctColorValue)), blue: CGFloat(Float(self.correctColorValue)), alpha: 1.0)
             self.currentScore += 1
         }
         else {
