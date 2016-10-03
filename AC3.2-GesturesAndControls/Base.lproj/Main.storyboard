@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l5U-51-TFZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l5U-51-TFZ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -41,19 +41,112 @@
                                     <segue destination="ogV-KT-dEg" kind="showDetail" id="EOd-KY-yXj"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bRS-eF-hra"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bRS-eF-hra">
+                                <connections>
+                                    <action selector="currentColor:" destination="J2o-vC-hGA" eventType="valueChanged" id="LSP-cS-ZpY"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fQe-7O-4pJ">
+                                <connections>
+                                    <action selector="currentColor:" destination="J2o-vC-hGA" eventType="valueChanged" id="Fs7-3k-nit"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lXp-zp-z9F">
+                                <connections>
+                                    <action selector="currentColor:" destination="J2o-vC-hGA" eventType="valueChanged" id="J7b-nk-6AL"/>
+                                </connections>
+                            </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1k-qw-Nq9">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="pmj-sk-pua"/>
+                                </constraints>
+                            </view>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C2V-mq-Wvn">
+                                <connections>
+                                    <action selector="onOrOff:" destination="J2o-vC-hGA" eventType="valueChanged" id="V3l-mb-lSJ"/>
+                                </connections>
+                            </switch>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Obh-XQ-KF3">
+                                <connections>
+                                    <action selector="whenStepped:" destination="J2o-vC-hGA" eventType="valueChanged" id="sZ1-FB-scD"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The score will be reset with a loss" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1k-30-gdh">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can play forever!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZt-7I-EUe">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VBE-jm-suG">
+                                <segments>
+                                    <segment title="Winning"/>
+                                    <segment title="Losing"/>
+                                </segments>
+                                <connections>
+                                    <action selector="winningOrLosing:" destination="J2o-vC-hGA" eventType="valueChanged" id="Ys2-Ig-bWg"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEh-Aq-Wl9">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HQ-MP-UbG">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960780000005" green="0.8518490621375493" blue="0.93824774966654123" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bRS-eF-hra" firstAttribute="centerX" secondItem="Tbd-3B-6hV" secondAttribute="centerX" id="0Ij-76-7ga"/>
+                            <constraint firstItem="Obh-XQ-KF3" firstAttribute="top" secondItem="C2V-mq-Wvn" secondAttribute="bottom" constant="25" id="1S4-HO-3LU"/>
+                            <constraint firstItem="HEh-Aq-Wl9" firstAttribute="centerX" secondItem="sg5-M7-GFO" secondAttribute="centerX" id="2RG-ha-1Wy"/>
+                            <constraint firstItem="C2V-mq-Wvn" firstAttribute="centerX" secondItem="sg5-M7-GFO" secondAttribute="centerX" id="2YC-Ze-GZA"/>
+                            <constraint firstItem="VBE-jm-suG" firstAttribute="centerX" secondItem="sg5-M7-GFO" secondAttribute="centerX" id="4ac-wU-shL"/>
+                            <constraint firstItem="GZt-7I-EUe" firstAttribute="centerX" secondItem="sg5-M7-GFO" secondAttribute="centerX" id="6Bz-Bi-KQW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="p1k-qw-Nq9" secondAttribute="trailing" constant="8" id="7e4-Co-FUz"/>
+                            <constraint firstItem="lXp-zp-z9F" firstAttribute="leading" secondItem="sg5-M7-GFO" secondAttribute="leadingMargin" id="7mf-6U-Uze"/>
                             <constraint firstItem="bRS-eF-hra" firstAttribute="trailing" secondItem="sg5-M7-GFO" secondAttribute="trailingMargin" id="EDE-Co-nFD"/>
+                            <constraint firstItem="VBE-jm-suG" firstAttribute="top" secondItem="Obh-XQ-KF3" secondAttribute="bottom" constant="25" id="Fpb-9F-E0r"/>
+                            <constraint firstItem="lXp-zp-z9F" firstAttribute="top" secondItem="fQe-7O-4pJ" secondAttribute="bottom" constant="15" id="Gs0-fB-ZZF"/>
+                            <constraint firstItem="fQe-7O-4pJ" firstAttribute="top" secondItem="bRS-eF-hra" secondAttribute="bottom" constant="15" id="KE4-KE-c3f"/>
+                            <constraint firstItem="Obh-XQ-KF3" firstAttribute="centerX" secondItem="sg5-M7-GFO" secondAttribute="centerX" id="Ob8-Mm-jcx"/>
+                            <constraint firstItem="HEh-Aq-Wl9" firstAttribute="top" secondItem="1HQ-MP-UbG" secondAttribute="bottom" constant="25" id="Q5J-dR-4jd"/>
                             <constraint firstAttribute="bottom" secondItem="Tbd-3B-6hV" secondAttribute="bottom" constant="20" symbolic="YES" id="Rqb-ai-bf7"/>
                             <constraint firstItem="bRS-eF-hra" firstAttribute="leading" secondItem="sg5-M7-GFO" secondAttribute="leadingMargin" id="RwN-cp-DAw"/>
+                            <constraint firstItem="lXp-zp-z9F" firstAttribute="trailing" secondItem="sg5-M7-GFO" secondAttribute="trailingMargin" id="Y8F-DU-ws9"/>
+                            <constraint firstItem="p1k-qw-Nq9" firstAttribute="top" secondItem="lXp-zp-z9F" secondAttribute="bottom" constant="8" id="Z8q-Qs-0OT"/>
+                            <constraint firstItem="C2V-mq-Wvn" firstAttribute="top" secondItem="p1k-qw-Nq9" secondAttribute="bottom" constant="25" id="atL-gp-NTP"/>
+                            <constraint firstItem="1HQ-MP-UbG" firstAttribute="centerX" secondItem="sg5-M7-GFO" secondAttribute="centerX" id="bsp-TF-OkZ"/>
+                            <constraint firstItem="p1k-qw-Nq9" firstAttribute="leading" secondItem="sg5-M7-GFO" secondAttribute="leadingMargin" constant="8" id="cFX-yB-ci7"/>
+                            <constraint firstItem="Tbd-3B-6hV" firstAttribute="top" secondItem="b1k-30-gdh" secondAttribute="bottom" constant="30" id="e4K-Cf-IXX"/>
+                            <constraint firstItem="fQe-7O-4pJ" firstAttribute="leading" secondItem="sg5-M7-GFO" secondAttribute="leadingMargin" id="gt8-ky-ZCC"/>
                             <constraint firstItem="bRS-eF-hra" firstAttribute="top" secondItem="tIF-Oo-dAZ" secondAttribute="bottom" constant="8" symbolic="YES" id="hMh-M7-Mzv"/>
+                            <constraint firstItem="GZt-7I-EUe" firstAttribute="top" secondItem="HEh-Aq-Wl9" secondAttribute="bottom" constant="25" id="p50-0R-Dvc"/>
+                            <constraint firstItem="fQe-7O-4pJ" firstAttribute="trailing" secondItem="sg5-M7-GFO" secondAttribute="trailingMargin" id="qJC-cp-Uby"/>
+                            <constraint firstItem="lXp-zp-z9F" firstAttribute="top" secondItem="fQe-7O-4pJ" secondAttribute="bottom" constant="15" id="uvC-BD-f3Q"/>
+                            <constraint firstItem="b1k-30-gdh" firstAttribute="centerX" secondItem="sg5-M7-GFO" secondAttribute="centerX" id="vos-cF-wP7"/>
+                            <constraint firstItem="b1k-30-gdh" firstAttribute="top" secondItem="GZt-7I-EUe" secondAttribute="bottom" constant="25" id="vw8-qN-33t"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="colorSlider" destination="bRS-eF-hra" id="YJV-a1-guJ"/>
+                        <outlet property="blueColorSlider" destination="fQe-7O-4pJ" id="Kqs-6S-SRb"/>
+                        <outlet property="currentColorView" destination="p1k-qw-Nq9" id="U1Q-GX-sLA"/>
+                        <outlet property="greenColorSlider" destination="lXp-zp-z9F" id="Iyp-TZ-JbA"/>
+                        <outlet property="losingColorLabel" destination="HEh-Aq-Wl9" id="UcZ-zM-ZCe"/>
+                        <outlet property="redColorSlider" destination="bRS-eF-hra" id="t3A-Be-Odf"/>
+                        <outlet property="resetScoreToggleLabelView" destination="b1k-30-gdh" id="xWz-5L-8El"/>
+                        <outlet property="stepperView" destination="Obh-XQ-KF3" id="tW1-8i-m5t"/>
+                        <outlet property="switchView" destination="C2V-mq-Wvn" id="quN-Ry-tyG"/>
+                        <outlet property="winningColorLabel" destination="1HQ-MP-UbG" id="OYZ-Rj-oPv"/>
+                        <outlet property="winningNumberLabelView" destination="GZt-7I-EUe" id="FbF-M8-Uic"/>
+                        <outlet property="winningOrLosingSegmentedControlView" destination="VBE-jm-suG" id="na3-7G-gFf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KDL-y3-bUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -82,12 +175,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xa-xR-bTB">
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <state key="normal" title="Reset">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetButtonPressed:" destination="ogV-KT-dEg" eventType="touchUpInside" id="Ojt-XV-8dS"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPu-eO-NnS" userLabel="Score">
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.62207506739999996" green="0.86368580569999998" blue="0.65738861609999999" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="4xa-xR-bTB" secondAttribute="trailing" constant="10" id="0ed-In-NLc"/>
                             <constraint firstItem="piS-iC-l1d" firstAttribute="centerX" secondItem="h3p-1U-ioM" secondAttribute="centerX" id="Mpa-BE-PlO"/>
+                            <constraint firstItem="hPu-eO-NnS" firstAttribute="top" secondItem="EO6-2X-dgV" secondAttribute="bottom" constant="12" id="PYh-Cs-07u"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hPu-eO-NnS" secondAttribute="trailing" constant="-1" id="QMj-5h-FEh"/>
                             <constraint firstItem="piS-iC-l1d" firstAttribute="centerY" secondItem="h3p-1U-ioM" secondAttribute="centerY" id="SFX-pb-Umc"/>
+                            <constraint firstItem="1PH-j8-o3Z" firstAttribute="top" secondItem="4xa-xR-bTB" secondAttribute="bottom" constant="10" id="ftI-Sc-3OO"/>
                             <constraint firstItem="EO6-2X-dgV" firstAttribute="trailing" secondItem="h3p-1U-ioM" secondAttribute="trailingMargin" id="gNW-eI-ep6"/>
                             <constraint firstItem="EO6-2X-dgV" firstAttribute="top" secondItem="2jn-vM-uZf" secondAttribute="bottom" constant="8" symbolic="YES" id="xqf-QD-O5a"/>
                         </constraints>
@@ -103,6 +214,8 @@
                         <outlet property="actionToPerformLabel" destination="piS-iC-l1d" id="X5P-hv-FuW"/>
                         <outlet property="doubleTapGestureRecognizer" destination="CDX-G4-Qab" id="js1-Sd-G7u"/>
                         <outlet property="leftSwipeGestureRecognizer" destination="xq0-1H-G9e" id="YLa-S7-WZ8"/>
+                        <outlet property="numberOfTriesLabel" destination="hPu-eO-NnS" id="Ljt-fQ-n95"/>
+                        <outlet property="resetButton" destination="4xa-xR-bTB" id="7TG-1B-kTo"/>
                         <outlet property="rightSwipeGestureRecognizer" destination="A40-wA-vLz" id="iHQ-lw-TzT"/>
                         <outlet property="scoreLabel" destination="EO6-2X-dgV" id="dFe-aZ-X2b"/>
                         <outlet property="tapGestureRecognizer" destination="jyn-c6-7ht" id="o96-Mu-RyM"/>
@@ -136,7 +249,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="124" y="192"/>
+            <point key="canvasLocation" x="123.63281249999999" y="191.40625"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

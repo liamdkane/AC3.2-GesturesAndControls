@@ -9,7 +9,18 @@
 import UIKit
 
 class GesturesViewController: UIViewController {
-    var correctColorValue = 0.0
+    var currentWinningColor: UIColor?
+    var currentLosingColor: UIColor?
+    var switchValue = true
+    var numberOfTriesBeforeAWin: Double?
+    var numberOfTriesBeforeALoss: Double?
+    
+    
+    var numberOfTries = 0 {
+        willSet {
+            self.numberOfTriesLabel.text = "Number of tries: \(newValue)"
+        }
+    }
     
     enum ActionGesture: Int {
         case tap, doubleTap, twoFingerTap, leftSwipe, rightSwipe
@@ -35,15 +46,17 @@ class GesturesViewController: UIViewController {
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet var doubleTapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet var twoFingerTapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var numberOfTriesLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tapGestureRecognizer.require(toFail: doubleTapGestureRecognizer)
         self.currentActionGesture = self.pickRandomActionGesture()
-
+        self.resetButton.isHidden = true
     }
-
+    
     // MARK: - Utility
     // update our label for each gesture
     func updateLabel(for actionGes: ActionGesture) {
@@ -66,32 +79,33 @@ class GesturesViewController: UIViewController {
     }
     
     // MARK: - Actions
-//    @IBAction func didTapView(_ sender: UITapGestureRecognizer) {
-//        print("I was tapped")
-//        self.isCorrect(self.currentActionGesture == .tap)
-//    }
-//    
-//    @IBAction func swipedLeft(_ sender: UISwipeGestureRecognizer) {
-//        print("Swiped left")
-//        self.isCorrect(self.currentActionGesture == .leftSwipe)
-//    }
-//    
-//    @IBAction func swipedRight(_ sender: UISwipeGestureRecognizer) {
-//        print("Swiped right")
-//        self.isCorrect(self.currentActionGesture == .rightSwipe)
-//    }
-//    
-//    @IBAction func didDoubleTapView(_ sender: UITapGestureRecognizer) {
-//        print("Did double tap view")
-//        self.isCorrect(self.currentActionGesture == .doubleTap)
-//    }
-//    
-//    @IBAction func didTwoFingerTapView(_ sender: UITapGestureRecognizer) {
-//        print("Did two finger tap view")
-//        self.isCorrect(self.currentActionGesture == .twoFingerTap)
-//    }
+    //    @IBAction func didTapView(_ sender: UITapGestureRecognizer) {
+    //        print("I was tapped")
+    //        self.isCorrect(self.currentActionGesture == .tap)
+    //    }
+    //
+    //    @IBAction func swipedLeft(_ sender: UISwipeGestureRecognizer) {
+    //        print("Swiped left")
+    //        self.isCorrect(self.currentActionGesture == .leftSwipe)
+    //    }
+    //
+    //    @IBAction func swipedRight(_ sender: UISwipeGestureRecognizer) {
+    //        print("Swiped right")
+    //        self.isCorrect(self.currentActionGesture == .rightSwipe)
+    //    }
+    //
+    //    @IBAction func didDoubleTapView(_ sender: UITapGestureRecognizer) {
+    //        print("Did double tap view")
+    //        self.isCorrect(self.currentActionGesture == .doubleTap)
+    //    }
+    //
+    //    @IBAction func didTwoFingerTapView(_ sender: UITapGestureRecognizer) {
+    //        print("Did two finger tap view")
+    //        self.isCorrect(self.currentActionGesture == .twoFingerTap)
+    //    }
     
     @IBAction func didPerformGesture(_ sender: UIGestureRecognizer) {
+        numberOfTries += 1
         if let tapGesture: UITapGestureRecognizer = sender as? UITapGestureRecognizer {
             switch (tapGesture.numberOfTapsRequired, tapGesture.numberOfTouchesRequired) {
                 
@@ -112,7 +126,7 @@ class GesturesViewController: UIViewController {
                 self.isCorrect(false)
             }
         }
-    
+        
         if let swipeGesture: UISwipeGestureRecognizer = sender as? UISwipeGestureRecognizer {
             
             switch swipeGesture.direction {
@@ -137,16 +151,36 @@ class GesturesViewController: UIViewController {
         
         if correct {
             // use the "correctColorValue" to manipulate the red component of a color
-            self.view.backgroundColor = UIColor(red: CGFloat(self.correctColorValue), green: 1.0, blue: 1.0, alpha: 1.0)
-            
+            self.view.backgroundColor = currentWinningColor
             // alternatively we can change the hue using this initializer of UIColor
             // self.view.backgroundColor = UIColor(hue: CGFloat(Float(self.correctColorValue)), saturation: 1.0, brightness: 1.0, alpha: 1.0)
-
+            
             self.currentScore += 1
         }
         else {
-            self.view.backgroundColor = UIColor.red
-            self.currentScore = 0
+            self.view.backgroundColor = currentLosingColor
+            if switchValue {
+                self.currentScore = 0
+                self.scoreLabel.text = "Score: \(currentScore)"
+            }
         }
+        if let win = numberOfTriesBeforeAWin {
+            if currentScore == Int(win) {
+                scoreLabel.text = "WINNER"
+                self.resetButton.isHidden = false
+            }
+        }
+        if let lose = numberOfTriesBeforeALoss {
+            if numberOfTries == Int(lose) {
+                scoreLabel.text = "LOSE"
+                self.resetButton.isHidden = false
+            }
+        }
+    }
+    
+    @IBAction func resetButtonPressed(_ sender: UIButton) {
+        self.currentScore = 0
+        self.numberOfTries = 0
+        self.view.reloadInputViews()
     }
 }
